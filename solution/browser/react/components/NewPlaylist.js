@@ -24,8 +24,9 @@ export default class NewPlaylist extends Component {
   }
 
   handleSubmit(event){
-    
+
     event.preventDefault()
+    this.props.handlePlaylistSubmit(this.state.input)
     this.setState({
       input: '',
       dirty: false
@@ -47,7 +48,7 @@ export default class NewPlaylist extends Component {
             <label className="col-xs-2 control-label">Name</label>
             <div className="col-xs-10">
               <input onChange={this.handleChange}  value={this.state.input} className="form-control" type="text" />
-                { 
+                {
                   this.state.dirty && this.state.input.length === 0 ? <div className="alert alert-warning">Please enter a name</div> : null
                 }
                 {

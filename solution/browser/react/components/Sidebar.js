@@ -19,16 +19,16 @@ const Sidebar = (props) => {
       <section>
         <h4 className="text-muted">PLAYLISTS</h4>
        <ul className="list-unstyled">
-        { 
+        {
           props.playlists && props.playlists.map(playlist => {
             return (
           <li key={playlist.id} className="playlist-item menu-item">
-            <Link to="FILL_ME_IN">{playlist.name}</Link>
+            <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
           </li>)
         })
         }
       </ul>
-       <hr /> 
+       <hr />
         <h4>
           <Link to="/NewPlaylist" className="btn btn-primary btn-block" >
             <span className="glyphicon glyphicon-plus"></span> PLAYLIST

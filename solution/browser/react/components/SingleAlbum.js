@@ -21,6 +21,18 @@ export default class SingleAlbum extends Component {
       }));
   }
 
+  componentWillReceiveProps (nextProps) {
+    const nextAlbumId = nextProps.match.params.albumId;
+    const currentAlbumId = this.props.match.params.albumId;
+    if (nextAlbumId !== currentAlbumId) {
+      axios.get(`/api/albums/${nextAlbumId}`)
+        .then(res => res.data)
+        .then(album => {
+          this.setState({ album });
+        });
+      }
+  }
+
   render () {
     const album = this.state.album;
 

@@ -28,6 +28,18 @@ class SingleArtist extends React.Component {
       });
   }
 
+  componentWillReceiveProps (nextProps) {
+    const nextArtistId = nextProps.match.params.artistId;
+    const currentArtistId = this.props.match.params.artistId;
+    if (nextArtistId !== currentArtistId) {
+      axios.get(`/api/artists/${nextArtistId}`)
+        .then(res => res.data)
+        .then(artist => {
+          this.setState({ artist });
+        });
+      }
+  }
+
   render () {
 
     const artist = this.state.artist;
