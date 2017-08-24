@@ -7,7 +7,8 @@ export default class NewPlaylist extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      input: ''
+      input: '',
+      dirty: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,20 +18,18 @@ export default class NewPlaylist extends Component {
   handleChange(event) {
     console.log(this.state.input)
     this.setState({
-      input: event.target.value
+      input: event.target.value,
+      dirty: true
     })
   }
 
   handleSubmit(event){
+    
     event.preventDefault()
-    console.log(this.state.input)
     this.setState({
-      input: ''
+      input: '',
+      dirty: false
     })
-    // this.props.addComment(this.props.species, this.props.id, this.state.comment)
-    // this.setState({
-    //   comment: ''
-    // })
   }
 
   handleValidation() {
@@ -48,6 +47,12 @@ export default class NewPlaylist extends Component {
             <label className="col-xs-2 control-label">Name</label>
             <div className="col-xs-10">
               <input onChange={this.handleChange}  value={this.state.input} className="form-control" type="text" />
+                { 
+                  this.state.dirty && this.state.input.length === 0 ? <div className="alert alert-warning">Please enter a name</div> : null
+                }
+                {
+                  this.state.dirty && this.state.input.length > 16 ? <div className="alert alert-warning">Name is too long</div> : null
+                }
             </div>
           </div>
           <div className="form-group">
