@@ -16,7 +16,6 @@ export default class NewPlaylist extends Component {
 
   handleChange(event) {
     console.log(this.state.input)
-    this.handleValidation()
     this.setState({
       input: event.target.value
     })
@@ -35,11 +34,11 @@ export default class NewPlaylist extends Component {
   }
 
   handleValidation() {
-    const button = document.getElementById('createButton')
-    this.state.input < 0 || this.state.input > 16 ? button.disabled = true :  button.disabled = false
+    return this.state.input.length < 1 || this.state.input.length > 16
   }
 
   render() {
+    const bool = this.handleValidation()
     return (
     <div className="well">
       <form onSubmit={this.handleSubmit}className="form-horizontal">
@@ -53,7 +52,7 @@ export default class NewPlaylist extends Component {
           </div>
           <div className="form-group">
             <div className="col-xs-10 col-xs-offset-2">
-              <button id="createButton" disabled="true" type="submit" className="btn btn-success">Create Playlist</button>
+              {<button id="createButton" disabled={bool} type="submit" className="btn btn-success">Create Playlist</button>}
             </div>
           </div>
         </fieldset>
